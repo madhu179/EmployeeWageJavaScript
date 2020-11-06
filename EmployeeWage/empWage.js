@@ -21,19 +21,85 @@ switch (empCheck) {
 }
 }
 
-function calculateDailyWage(empHrs)
+function calculateDailyWage(hrs)
 {
-    return empHRS * WAGE_PER_HR;
+    return hrs * WAGE_PER_HR;
 }
-let empHRS = 0,empWage = 0,empCheck = 0,days=0;
+let empHRS = 0,empWage = 0,empCheck = 0,days=1;
 let empDailyWageArray = new Array();
+let totalEmpHrs = 0;
+let totalWage = 0;
 
 while(days<=NO_OF_WRK_DAYS && empHRS<=MAX_WRK_HRS)
 {
 days++;
 empCheck = Math.floor(Math.random() * 10) % 3;
-empHRS += getWorkHRs(empCheck);
+empHRS = getWorkHRs(empCheck);
+totalEmpHrs += empHRS;
 empDailyWageArray.push(calculateDailyWage(empHRS));
 }
-empWage = calculateDailyWage(empHRS);
-console.log("Wage = "+empWage+" WorkHrs = "+empHRS);
+
+//a
+
+function calculateTotalWage(dailyWage)
+{
+     totalWage += dailyWage; 
+}
+empDailyWageArray.forEach(calculateTotalWage);
+console.log("Wage = "+totalWage+" WorkHrs = "+totalEmpHrs);
+
+function totalWageReduce(totalWages,wage)
+{
+    return wage+totalWages;
+}
+console.log("Wage = "+empDailyWageArray.reduce(totalWageReduce,0)+" WorkHrs = "+totalEmpHrs);
+
+//b
+let dayCount = 0;
+function showDayWithWage(wage)
+{
+    dayCount++;
+    return dayCount+" -> "+wage;
+}
+let dayWithWage = empDailyWageArray.map(showDayWithWage);
+console.log(dayWithWage);
+
+//c
+function showDayWithFullTime(wage)
+{
+    return wage.includes("160");
+}
+let daysWithFullTime = dayWithWage.filter(showDayWithFullTime);
+console.log(daysWithFullTime);
+
+//d
+function firstFulltime(wage)
+{
+    return wage.includes("160");
+}
+let firstDayFullTime = dayWithWage.find(showDayWithFullTime);
+console.log(firstDayFullTime);
+
+//e
+function checkFullTime(wage)
+{
+    return wage.includes("160");
+}
+console.log(dayWithWage.every(checkFullTime));
+
+//f
+function checkPartTime(wage)
+{
+    return wage.includes("80");
+}
+console.log(dayWithWage.some(checkPartTime));
+
+//g
+function totalDaysWorked(totalDays,dailyWage)
+{
+    if(dailyWage>0)
+    totalDays++;
+    return totalDays;
+}
+let daysTotal = empDailyWageArray.reduce(totalDaysWorked,0);
+console.log("Total Days Worked = "+daysTotal);
