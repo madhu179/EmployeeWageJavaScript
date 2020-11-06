@@ -29,18 +29,19 @@ let empHRS = 0,empWage = 0,empCheck = 0,days=1;
 let empDailyWageArray = new Array();
 let totalEmpHrs = 0;
 let totalWage = 0;
+let empDailyWageMap = new Map();
 
 while(days<=NO_OF_WRK_DAYS && empHRS<=MAX_WRK_HRS)
 {
-days++;
 empCheck = Math.floor(Math.random() * 10) % 3;
 empHRS = getWorkHRs(empCheck);
 totalEmpHrs += empHRS;
 empDailyWageArray.push(calculateDailyWage(empHRS));
+empDailyWageMap.set(days,calculateDailyWage(empHRS));
+days++;
 }
 
 //a
-
 function calculateTotalWage(dailyWage)
 {
      totalWage += dailyWage; 
@@ -103,3 +104,10 @@ function totalDaysWorked(totalDays,dailyWage)
 }
 let daysTotal = empDailyWageArray.reduce(totalDaysWorked,0);
 console.log("Total Days Worked = "+daysTotal);
+
+function totalWageCalculate(totalwage,wage)
+{
+    return totalwage+wage;
+}
+
+console.log("Total wage = "+Array.from(empDailyWageMap.values()).reduce(totalWageCalculate,0));
