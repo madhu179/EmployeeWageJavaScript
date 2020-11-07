@@ -169,3 +169,23 @@ days++;
 
 console.log("Array with all data in form of object is "+empDailyWageArrayObject);
 
+//10a
+let Totalwage = empDailyWageArrayObject.filter(e=>e.dailyHours>0).reduce((totalWage,e)=>totalWage+=e.dailyWage,0);
+console.log("Total wage using arrow functions : "+Totalwage);
+
+let Totalhrs = empDailyWageArrayObject.filter(e=>e.dailyHours>0).reduce((totalHrs,e)=>totalHrs+=e.dailyHours,0);
+console.log("Total hours using arrow functions : "+Totalhrs);
+
+//10b
+let str = " ";
+empDailyWageArrayObject.filter(e=>e.dailyHours==8).forEach(e=>str = str+e.day+" ,");
+console.log("Full Working days : "+str);
+
+//10c
+let partWorkingDays =empDailyWageArrayObject.filter(e=>e.dailyHours==4).map(e=>e.toString());
+console.log("Part Working days : "+partWorkingDays);
+
+//10d
+
+let noWorkingDays =empDailyWageArrayObject.filter(e=>e.dailyHours==0).map(e=>e.day);
+console.log("Part Working days : "+noWorkingDays);
