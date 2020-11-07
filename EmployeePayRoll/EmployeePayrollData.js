@@ -7,6 +7,7 @@ class EmployeePayRollData{
         this.salary = params[2];
         this.gender = params[3];
         this.startDate = params[4];
+        this.pinCode = params[5];
     }
 
     get id()
@@ -72,13 +73,26 @@ class EmployeePayRollData{
 
     set startDate(startDate)
     {
-        let datee =  new Date();
-        if(startDate<datee)
+        let datee = new Date();
+        if(startDate<=datee)
         {
         this._startDate = startDate;
         }
         else
         throw 'StratDate is incorrect';
+    }
+    get pinCode()
+    {
+        return this._pinCode;
+    }
+
+    set pinCode(pinCode)
+    {
+        let pinRegex = RegExp('[0-9]{6}');
+        if(pinRegex.test(pinCode))
+        this._pinCode = pinCode;
+        else
+        throw 'Pin Code is incorrect';
     }
 
     toString()
@@ -87,14 +101,14 @@ class EmployeePayRollData{
         const date = this.startDate === undefined ? "undefined" :
                      this.startDate.toLocaleDateString("en-US",format);
         return "Id = "+this.id+", Name = "+this.name+", Salary = "+this.salary+
-                ", Gender = "+this.gender+", StartDate = "+date;
+                ", Gender = "+this.gender+", StartDate = "+date+", Pin Code = "+this.pinCode;
     }
 
 }
 
 try{ 
-let newEmployeeData = new EmployeePayRollData(1,"Strange",150000,'M',new Date());
-newEmployeeData.gender='i';
+let newEmployeeData = new EmployeePayRollData(1,"Strange",150000,'M',new Date(),400088);
+newEmployeeData.pinCode=44;
 console.log(newEmployeeData.toString());
 }catch(e){
     console.error(e);
