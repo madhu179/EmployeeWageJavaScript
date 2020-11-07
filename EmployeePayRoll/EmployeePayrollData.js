@@ -21,7 +21,11 @@ class EmployeePayRollData{
 
     set name(name)
     {
+        let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');
+        if(nameRegex.test(name))
         this._name = name;
+        else 
+        throw 'Name is incorrect';
     }
 
     toString()
@@ -37,7 +41,12 @@ class EmployeePayRollData{
 
 let employeeData = new EmployeePayRollData(1,"Tony",1300000);
 console.log(employeeData.toString());
+try{
 employeeData.name = "Steve";
 console.log(employeeData.toString());
+}catch(e){
+    console.error(e);
+}
+
 let newEmployeeData = new EmployeePayRollData(2,"Strange",150000,"M",new Date());
 console.log(newEmployeeData.toString());
