@@ -1,10 +1,5 @@
 class EmployeePayRollData{
 
-    id;
-    salary;
-    gender;
-    startDate;
-
     constructor(...params)
     {
         this.id = params[0];
@@ -12,6 +7,20 @@ class EmployeePayRollData{
         this.salary = params[2];
         this.gender = params[3];
         this.startDate = params[4];
+    }
+
+    get id()
+    {
+        return this._id;
+    }
+
+    set id(id)
+    {
+        let idRegex = RegExp('[1-9]{1}[0-9]*');
+        if(idRegex.test(id))
+        this._id = id;
+        else
+        throw 'Id is incorrect';
     }
 
     get name()
@@ -28,6 +37,50 @@ class EmployeePayRollData{
         throw 'Name is incorrect';
     }
 
+    get salary()
+    {
+        return this._salary;
+    }
+
+    set salary(salary)
+    {
+        let salaryRegex = RegExp('[1-9]{1}[0-9]*');
+        if(salaryRegex.test(salary))
+        this._salary = salary;
+        else
+        throw 'Salary is incorrect';
+    }
+
+    get gender()
+    {
+        return this._gender;
+    }
+
+    set gender(gender)
+    {
+        let genderRegex = RegExp('M|F');
+        if(genderRegex.test(gender))
+        this._gender = gender;
+        else
+        throw 'Gender is incorrect';
+    }
+
+    get startDate()
+    {
+        return this._startDate;
+    }
+
+    set startDate(startDate)
+    {
+        let datee =  new Date();
+        if(startDate<datee)
+        {
+        this._startDate = startDate;
+        }
+        else
+        throw 'StratDate is incorrect';
+    }
+
     toString()
     {
         const format = {year:'numeric', month:'long', day:'numeric'};
@@ -39,14 +92,10 @@ class EmployeePayRollData{
 
 }
 
-let employeeData = new EmployeePayRollData(1,"Tony",1300000);
-console.log(employeeData.toString());
-try{
-employeeData.name = "Steve";
-console.log(employeeData.toString());
+try{ 
+let newEmployeeData = new EmployeePayRollData(1,"Strange",150000,'M',new Date());
+newEmployeeData.gender='i';
+console.log(newEmployeeData.toString());
 }catch(e){
     console.error(e);
 }
-
-let newEmployeeData = new EmployeePayRollData(2,"Strange",150000,"M",new Date());
-console.log(newEmployeeData.toString());
