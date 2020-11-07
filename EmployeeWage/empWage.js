@@ -32,7 +32,7 @@ let totalWage = 0;
 let empDailyWageMap = new Map();
 let empDailyHrMap = new Map();
 
-while(days<=NO_OF_WRK_DAYS && empHRS<=MAX_WRK_HRS)
+while(days<=NO_OF_WRK_DAYS && totalEmpHrs<=MAX_WRK_HRS)
 {
 empCheck = Math.floor(Math.random() * 10) % 3;
 empHRS = getWorkHRs(empCheck);
@@ -132,7 +132,6 @@ let fullWorkDays = new Array();
 let partWorkDays = new Array();
 let noWorkDays  = new Array();
 
-// for([key,value] of empDailyHrMap)
 empDailyHrMap.forEach((value,key)=>{
     if(value==0)
     noWorkDays.push(key);
@@ -146,4 +145,27 @@ console.log("Full Work Days are "+fullWorkDays);
 console.log("Part Work Days are "+partWorkDays);
 console.log("No Work Days are "+noWorkDays);
 
+//10
+let empDailyWageArrayObject = new Array();
+days=1;
+totalEmpHrs=0;
+while(days<=NO_OF_WRK_DAYS && totalEmpHrs<=MAX_WRK_HRS)
+{
+empCheck = Math.floor(Math.random() * 10) % 3;
+empHRS = getWorkHRs(empCheck);
+totalEmpHrs += empHRS;
+empDailyWageArrayObject.push(
+    {
+    day:days,
+    dailyHours:empHRS,
+    dailyWage:calculateDailyWage(empHRS),
+    toString()
+    {
+        return "\nDay"+this.day+" => hours worked = "+this.dailyHours+" wage earned = "+this.dailyWage
+    },
+    });
+days++;
+}
+
+console.log("Array with all data in form of object is "+empDailyWageArrayObject);
 
