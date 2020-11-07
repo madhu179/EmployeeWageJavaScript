@@ -8,6 +8,7 @@ class EmployeePayRollData{
         this.gender = params[3];
         this.startDate = params[4];
         this.pinCode = params[5];
+        this.email = params[6];
     }
 
     get id()
@@ -95,20 +96,34 @@ class EmployeePayRollData{
         throw 'Pin Code is incorrect';
     }
 
+    get email()
+    {
+        return this._email;
+    }
+
+    set email(email)
+    {
+        let emailRegex = RegExp('^[a-zA-Z]+$');
+        if(emailRegex.test(email))
+        this._email = email;
+        else
+        throw 'Email is incorrect';
+    }
+
     toString()
     {
         const format = {year:'numeric', month:'long', day:'numeric'};
         const date = this.startDate === undefined ? "undefined" :
                      this.startDate.toLocaleDateString("en-US",format);
         return "Id = "+this.id+", Name = "+this.name+", Salary = "+this.salary+
-                ", Gender = "+this.gender+", StartDate = "+date+", Pin Code = "+this.pinCode;
+                ", Gender = "+this.gender+", StartDate = "+date+", Pin Code = "+this.pinCode+", Email = "+this.email;
     }
 
 }
 
 try{ 
-let newEmployeeData = new EmployeePayRollData(1,"Strange",150000,'M',new Date(),"400088");
-newEmployeeData.pinCode="486 567";
+let newEmployeeData = new EmployeePayRollData(1,"Strange",150000,'M',new Date(),"400088","abc");
+newEmployeeData.email="1ab";
 console.log(newEmployeeData.toString());
 }catch(e){
     console.error(e);
