@@ -103,7 +103,7 @@ class EmployeePayRollData{
 
     set email(email)
     {
-        let emailRegex = RegExp('^[a-zA-Z]+@[a-zA-Z]+[.][a-zA-z]+$');
+        let emailRegex = RegExp('^[a-zA-Z]+[a-zA-Z_+.-]*[a-zA-Z]+@[a-zA-Z]+[.][a-zA-z]+$');
         if(emailRegex.test(email))
         this._email = email;
         else
@@ -122,8 +122,8 @@ class EmployeePayRollData{
 }
 
 try{ 
-let newEmployeeData = new EmployeePayRollData(1,"Strange",150000,'M',new Date(),"400088","abc@xyz.com");
-newEmployeeData.email="abc@xyz";
+let newEmployeeData = new EmployeePayRollData(1,"Strange",150000,'M',new Date(),"400088","abc.+-xyz@bl.com");
+newEmployeeData.email="abc.//xys@bl.co";
 console.log(newEmployeeData.toString());
 }catch(e){
     console.error(e);
