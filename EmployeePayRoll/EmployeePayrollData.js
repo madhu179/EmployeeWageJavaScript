@@ -88,7 +88,7 @@ class EmployeePayRollData{
 
     set pinCode(pinCode)
     {
-        let pinRegex = RegExp('[0-9]{6}');
+        let pinRegex = RegExp('^[0-9]{6}');
         if(pinRegex.test(pinCode))
         this._pinCode = pinCode;
         else
@@ -107,8 +107,8 @@ class EmployeePayRollData{
 }
 
 try{ 
-let newEmployeeData = new EmployeePayRollData(1,"Strange",150000,'M',new Date(),400088);
-newEmployeeData.pinCode=44;
+let newEmployeeData = new EmployeePayRollData(1,"Strange",150000,'M',new Date(),"400088");
+newEmployeeData.pinCode="A48656";
 console.log(newEmployeeData.toString());
 }catch(e){
     console.error(e);
