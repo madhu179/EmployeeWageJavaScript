@@ -189,3 +189,35 @@ console.log("Part Working days : "+partWorkingDays);
 
 let noWorkingDays =empDailyWageArrayObject.filter(e=>e.dailyHours==0).map(e=>e.day);
 console.log("Part Working days : "+noWorkingDays);
+
+//Updated 7
+
+//a
+Totalwage = empDailyWageArrayObject.filter(e=>e.dailyHours>0).reduce((totalWage,e)=>totalWage+=e.dailyWage,0);
+console.log("Total wage using arrow functions : "+Totalwage);
+
+//b
+let daysWithWage = empDailyWageArrayObject.map(e=>e.day+" : "+e.dailyWage);
+console.log("Day with wage : "+daysWithWage);
+
+//c
+str = " ";
+empDailyWageArrayObject.filter(e=>e.dailyHours==8).forEach(e=>str = str+e.day+" ,");
+console.log("Full Working days : "+str);
+
+//d
+let first = empDailyWageArrayObject.find(e=>e.dailyHours==8);
+console.log("First day with full wage : "+first);
+
+//e
+let check = empDailyWageArrayObject.every(e=>e.dailyHours==8);
+console.log("Are all full time wages? "+check);
+
+//f
+check = empDailyWageArrayObject.some(e=>e.dailyHours==4);
+console.log("Is there any part time wage present? "+check);
+
+//g
+let numberOfDaysWorked = 0;
+empDailyWageArrayObject.filter(e=>e.dailyHours>0).forEach(e=>++numberOfDaysWorked);
+console.log("Full days worked : "+numberOfDaysWorked);
