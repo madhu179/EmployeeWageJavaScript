@@ -132,15 +132,15 @@ let fullWorkDays = new Array();
 let partWorkDays = new Array();
 let noWorkDays  = new Array();
 
-for([key,value] of empDailyHrMap)
-{
+// for([key,value] of empDailyHrMap)
+empDailyHrMap.forEach((value,key)=>{
     if(value==0)
     noWorkDays.push(key);
     else if(value==4)
     partWorkDays.push(key);
     else
     fullWorkDays.push(key);
-}
+});
 
 console.log("Full Work Days are "+fullWorkDays);
 console.log("Part Work Days are "+partWorkDays);
